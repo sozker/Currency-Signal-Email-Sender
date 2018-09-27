@@ -10,8 +10,8 @@ import requests
 import quandl
 
 #e-mail info
-from_address = "sender@gmail.com"
-to_address = ["receiver1@gmail.com","receiver2@gmail.com"]
+from_address = "sertac.sinyal@gmail.com"
+to_address = ["sozker@yahoo.com","hasmir99@hotmail.com","ogansid@hotmail.com","ilkeruyguner@gmail.com","batughan.aydin@gmail.com","guwengul@gmail.com","alpernt1@gmail.com","garabetik@yahoo.com"]
 
 
 #parameters
@@ -21,12 +21,14 @@ margin_kripto_ust = 0.005
 margin_doviz = 0.005
 margin_parite = 0.002
 
-sinyal_arasi_sure = 12*60*60 #12 hours - the period it will wait for sending a signal for the same currency
-bekleme_suresi = 5*60 #5 minutes - the period it will wait between each search 
+margin_gold = 0.002
+
+sinyal_arasi_sure = 8*60*60 #8 hours - the period it will wait for sending a signal for the same currency
+bekleme_suresi = 3*60 #3 minutes - the period it will wait between each search 
 
 #binance connection
-api_key = "ENTER_YOUR_API_KEY"
-api_secret = "ENTER_YOUR_API_SECRET"
+api_key = "u1biOGsY1ss8SH9TGwcwWgEPYR389AmleBqhwNIWz7qqMrb4dpFBfzhkn7IyOcpW"
+api_secret = "GKlP514wK71yLrP9PL2kcCTGh75DoxyRtI1tKOx4RVzTRdFvmgfoFvbJZoGVyr9s"
 client = Client(api_key, api_secret, {"timeout": 1000})
 
 #just initial data for dataframe
@@ -114,7 +116,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("USERNAME", "PASSWORD")
+                    server.login("sertac.sinyal", "147Lahana")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -170,7 +172,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("USERNAME", "PASSWORD")
+                    server.login("sertac.sinyal", "147Lahana")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -211,6 +213,11 @@ while i>0:
             else:
                 margin = margin_doviz
                 
+            if kur == 'EUR/USD':
+                q = 150
+            else:
+                q = 75
+                
             #last signal detection
             
             son_sinyalden_gecen_sure = (datetime.datetime.now() - sinyal[sinyal['kur']==kur]['zaman'].max()).seconds
@@ -231,7 +238,7 @@ while i>0:
                 kur_alis = kur_11+kur_12/1000
                 
                 x = response.text.find(kur)
-                st = (response.text[x+75:x+200])
+                st = (response.text[x+q:x+q+150])
                 x = st.find(',')
                 kur_21 = float(st[x-1:x])
                 kur_22 = float(st[x+1:x+4])
@@ -239,7 +246,7 @@ while i>0:
 
                 kur_son = (kur_alis + kur_satis) / 2
                 
-                quandl.ApiConfig.api_key = "ENTER_YOUR_API_KEY"
+                quandl.ApiConfig.api_key = "fpAxEt1wp2J3uNg2kwK7"
                 start = str(datetime.datetime.now().date() - datetime.timedelta(days=180))
                 end = str(datetime.datetime.now().date())
                 
@@ -274,7 +281,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("USERNAME", "PASSWORD")
+                    server.login("sertac.sinyal", "147Lahana")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Finansbank "+str(kur_alis)+"'ten alip "+str(kur_satis)+"'ten satiyor. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -311,7 +318,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("USERNAME", "PASSWORD")
+                    server.login("sertac.sinyal", "147Lahana")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Finansbank "+str(kur_alis)+"'ten alip "+str(kur_satis)+"'ten satiyor. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -321,11 +328,129 @@ while i>0:
                     sinyal_ekleme = pd.DataFrame({'kur':[kur],'zaman':[datetime.datetime.now()]})
                     sinyal = pd.concat([sinyal,sinyal_ekleme])
                 else: x=0
-                    
+                
             else: x=0
 
+########################################### GOLD ###########################################
 
+
+        #last signal detection
+        
+        kur = 'GOLD'
     
+        son_sinyalden_gecen_sure = (datetime.datetime.now() - sinyal[sinyal['kur']==kur]['zaman'].max()).seconds
+
+        if math.isnan(son_sinyalden_gecen_sure):
+            son_sinyalden_gecen_sure = 1000000
+        else: x=0
+
+        if son_sinyalden_gecen_sure > sinyal_arasi_sure:
+
+            url = 'http://finans.mynet.com/altin/'
+            response = requests.get(url)
+
+            x = response.text.find('Ons Alt')
+            st = (response.text[x:x+150])
+            x = st.find(',')
+            kur_11 = float(st[x-4:x])
+            kur_12 = float(st[x+1:x+3])
+            kur_alis = kur_11+kur_12/1000
+
+            x = response.text.find('Ons Alt')
+            st = (response.text[x+150:x+250])
+            x = st.find(',')
+            kur_21 = float(st[x-4:x])
+            kur_22 = float(st[x+1:x+3])
+            kur_satis = kur_21+kur_22/1000
+
+            kur_son = (kur_alis + kur_satis) / 2
+
+            quandl.ApiConfig.api_key = "fpAxEt1wp2J3uNg2kwK7"
+            start = str(datetime.datetime.now().date() - datetime.timedelta(days=180))
+            end = str(datetime.datetime.now().date())
+
+            df = quandl.get('LBMA/GOLD', start_date=start, end_date=end)
+            df = df.reset_index()
+            df = df[['Date','USD (AM)']]
+            df = df.append({'Date':datetime.datetime.now(), 'USD (AM)':kur_son}, ignore_index=True)
+
+            #min prices
+            min_1_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=30))]['USD (AM)'].min() * (1+margin_gold)
+            min_2_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=60))]['USD (AM)'].min() * (1+margin_gold)
+            min_3_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=90))]['USD (AM)'].min() * (1+margin_gold)
+            min_4_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=120))]['USD (AM)'].min() * (1+margin_gold)
+            min_5_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=150))]['USD (AM)'].min() * (1+margin_gold)
+            min_6_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=180))]['USD (AM)'].min() * (1+margin_gold)
+
+            donem = 0
+            if kur_son < min_1_ay: donem = 1 
+            else: x=0
+            if kur_son < min_2_ay: donem = 2
+            else: x=0
+            if kur_son < min_3_ay: donem = 3
+            else: x=0
+            if kur_son < min_4_ay: donem = 4
+            else: x=0
+            if kur_son < min_5_ay: donem = 5
+            else: x=0
+            if kur_son < min_6_ay: donem = 6
+            else: x=0                
+
+            if donem >= 1:
+                server = smtplib.SMTP_SSL()
+                server.connect("smtp.gmail.com", 465)
+                server.ehlo()
+                server.login("sertac.sinyal", "147Lahana")
+                subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
+                text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile USD karsisinda son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
+                message = 'Subject: {}\n\n{}'.format(subject, text)
+                server.sendmail(from_address, to_address, message)
+                server.quit()
+
+                sinyal_ekleme = pd.DataFrame({'kur':[kur],'zaman':[datetime.datetime.now()]})
+                sinyal = pd.concat([sinyal,sinyal_ekleme])
+            else: x=0
+
+            #max prices
+            max_1_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=30))]['USD (AM)'].max() * (1-margin_gold)
+            max_2_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=60))]['USD (AM)'].max() * (1-margin_gold)
+            max_3_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=90))]['USD (AM)'].max() * (1-margin_gold)
+            max_4_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=120))]['USD (AM)'].max() * (1-margin_gold)
+            max_5_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=150))]['USD (AM)'].max() * (1-margin_gold)
+            max_6_ay = df[df['Date']>=(datetime.datetime.now().date() - datetime.timedelta(days=180))]['USD (AM)'].max() * (1-margin_gold)
+
+            donem = 0
+            if kur_son > max_1_ay: donem = 1 
+            else: x=0
+            if kur_son > max_2_ay: donem = 2
+            else: x=0
+            if kur_son > max_3_ay: donem = 3
+            else: x=0
+            if kur_son > max_4_ay: donem = 4
+            else: x=0
+            if kur_son > max_5_ay: donem = 5
+            else: x=0
+            if kur_son > max_6_ay: donem = 6
+            else: x=0       
+
+            if donem >= 1:
+                server = smtplib.SMTP_SSL()
+                server.connect("smtp.gmail.com", 465)
+                server.ehlo()
+                server.login("sertac.sinyal", "147Lahana")
+                subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
+                text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile USD karsisinda son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
+                message = 'Subject: {}\n\n{}'.format(subject, text)
+                server.sendmail(from_address, to_address, message)
+                server.quit()
+
+                sinyal_ekleme = pd.DataFrame({'kur':[kur],'zaman':[datetime.datetime.now()]})
+                sinyal = pd.concat([sinyal,sinyal_ekleme])
+            else: x=0
+
+        else: x=0
+
+
         time.sleep(bekleme_suresi)
 
     except:
