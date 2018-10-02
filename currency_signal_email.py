@@ -10,8 +10,8 @@ import requests
 import quandl
 
 #e-mail info
-from_address = "sertac.sinyal@gmail.com"
-to_address = ["sozker@yahoo.com","hasmir99@hotmail.com","ogansid@hotmail.com","ilkeruyguner@gmail.com","batughan.aydin@gmail.com","guwengul@gmail.com","alpernt1@gmail.com","garabetik@yahoo.com"]
+from_address = "sender@gmail.com"
+to_address = ["receiver_1@yahoo.com","receiver_1@hotmail.com"]
 
 
 #parameters
@@ -27,8 +27,8 @@ sinyal_arasi_sure = 8*60*60 #8 hours - the period it will wait for sending a sig
 bekleme_suresi = 3*60 #3 minutes - the period it will wait between each search 
 
 #binance connection
-api_key = "u1biOGsY1ss8SH9TGwcwWgEPYR389AmleBqhwNIWz7qqMrb4dpFBfzhkn7IyOcpW"
-api_secret = "GKlP514wK71yLrP9PL2kcCTGh75DoxyRtI1tKOx4RVzTRdFvmgfoFvbJZoGVyr9s"
+api_key = "ENTER YOUR API KEY"
+api_secret = "ENTER YOUR API SECRET"
 client = Client(api_key, api_secret, {"timeout": 1000})
 
 #just initial data for dataframe
@@ -116,7 +116,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -172,7 +172,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -246,7 +246,7 @@ while i>0:
 
                 kur_son = (kur_alis + kur_satis) / 2
                 
-                quandl.ApiConfig.api_key = "fpAxEt1wp2J3uNg2kwK7"
+                quandl.ApiConfig.api_key = "YOUR QUANDL API KEY"
                 start = str(datetime.datetime.now().date() - datetime.timedelta(days=180))
                 end = str(datetime.datetime.now().date())
                 
@@ -281,7 +281,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Finansbank "+str(kur_alis)+"'ten alip "+str(kur_satis)+"'ten satiyor. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -318,7 +318,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Finansbank "+str(kur_alis)+"'ten alip "+str(kur_satis)+"'ten satiyor. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -365,7 +365,7 @@ while i>0:
 
             kur_son = (kur_alis + kur_satis) / 2
 
-            quandl.ApiConfig.api_key = "fpAxEt1wp2J3uNg2kwK7"
+            quandl.ApiConfig.api_key = "YOUR QUANDL API KEY"
             start = str(datetime.datetime.now().date() - datetime.timedelta(days=180))
             end = str(datetime.datetime.now().date())
 
@@ -400,7 +400,7 @@ while i>0:
                 server = smtplib.SMTP_SSL()
                 server.connect("smtp.gmail.com", 465)
                 server.ehlo()
-                server.login("sertac.sinyal", "147Lahana")
+                server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                 subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                 text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile USD karsisinda son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
                 message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -437,7 +437,7 @@ while i>0:
                 server = smtplib.SMTP_SSL()
                 server.connect("smtp.gmail.com", 465)
                 server.ehlo()
-                server.login("sertac.sinyal", "147Lahana")
+                server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                 subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                 text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile USD karsisinda son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
                 message = 'Subject: {}\n\n{}'.format(subject, text)
