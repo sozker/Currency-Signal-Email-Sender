@@ -11,10 +11,8 @@ import os
 import shutil
 
 #e-mail info
-from_address = "sertac.sinyal@gmail.com"
-to_address = ["sozker@yahoo.com","hasmir99@hotmail.com","ogansid@hotmail.com",
-              "ilkeruyguner@gmail.com","batughan.aydin@gmail.com","guwengul@gmail.com",
-              "alpernt1@gmail.com","garabetik@yahoo.com","ugurtunerir@yahoo.com"]
+from_address = "sender@gmail.com"
+to_address = ["receiver_1@yahoo.com","receiver_1@hotmail.com"]
 
 
 #parameters
@@ -28,8 +26,8 @@ sinyal_arasi_sure = 8*60*60 #8 hours - the period it will wait for sending a sig
 bekleme_suresi = 3*60 #3 minutes - the period it will wait between each search 
 
 #binance connection
-api_key = "u1biOGsY1ss8SH9TGwcwWgEPYR389AmleBqhwNIWz7qqMrb4dpFBfzhkn7IyOcpW"
-api_secret = "GKlP514wK71yLrP9PL2kcCTGh75DoxyRtI1tKOx4RVzTRdFvmgfoFvbJZoGVyr9s"
+api_key = "ENTER YOUR API KEY"
+api_secret = "ENTER YOUR API SECRET"
 client = Client(api_key, api_secret, {"timeout": 1000})
 
 #just initial data for dataframe
@@ -119,7 +117,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -175,7 +173,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(son_fiyat)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -200,11 +198,11 @@ while i>0:
 
         username = '//*[@id="loginFormUser_email"]'
         box1 = driver.find_element_by_xpath(username)
-        box1.send_keys('sozker@yahoo.com')
+        box1.send_keys('ENTER YOUR INVESTING.COM USERNAME')
 
         password = '//*[@id="loginForm_password"]'
         box2 = driver.find_element_by_xpath(password)
-        box2.send_keys('147_Sogan')
+        box2.send_keys('ENTER YOUR INVESTING.COM PASSWORD')
 
         signin = '//*[@id="signup"]/a'
         button2 = driver.find_element_by_xpath(signin)
@@ -346,7 +344,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en dusugunde, alim firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en dusuk seviyelerinde. Alim firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
@@ -401,7 +399,7 @@ while i>0:
                     server = smtplib.SMTP_SSL()
                     server.connect("smtp.gmail.com", 465)
                     server.ehlo()
-                    server.login("sertac.sinyal", "147Lahana")
+                    server.login("YOUR MAIL ADDRESS", "YOUR PASSWORD")
                     subject = "--- "+kur+" son "+str(donem)+" ayin en yukseginde, satis firsati olabilir ---"
                     text = "Merhaba, \n"+kur+" "+str(kur_son)+" ile son "+str(donem)+" ayin en yuksek seviyelerinde. Satis firsati olabilir."
                     message = 'Subject: {}\n\n{}'.format(subject, text)
