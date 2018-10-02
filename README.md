@@ -5,7 +5,7 @@ This program sends e-mails when a top or bottom point reached for cryptocurrenci
 
 There is the old version and the new version:
 
-## OLD VERSION
+### OLD VERSION
 
 Program chooses the top 15 cryptocurencies with the highest volume on Binance, plus BTC/USDT. It checks the prices for 12 months and sends an e-mail if the price is close to the bottom or top price in this 12 months with some margin.
 
@@ -13,7 +13,7 @@ Foreign currencies are chosen as EUR/USD, USD/TRY, EUR/TRY and GBP/TRY. Current 
 
 Gold prices versus USD has been added. Current price is taken from Mynet Finans (a Turkish website) while historical data is taken from Quandl.
 
-## NEW VERSION
+### NEW VERSION
 
 Program chooses the top 15 cryptocurencies with the highest volume on Binance, plus BTC/USDT. It checks the prices for 12 months and sends an e-mail if the price is close to the bottom or top price in this 12 months with some margin.
 
