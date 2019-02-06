@@ -415,7 +415,7 @@ while i>0:
 
             else: x=0
 
-        driver.close()
+        driver.quit()
 
         time.sleep(bekleme_suresi)
 
